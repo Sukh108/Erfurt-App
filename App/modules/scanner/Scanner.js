@@ -1,61 +1,52 @@
 /**
- * 
+ *
  * @format
  */
-import React ,{useState}from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Header from '../../components/header/Header';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera'
+import {RNCamera} from 'react-native-camera';
+import styles from './styles';
 function Scanner(props) {
-  const [selected,setSelected] =useState("name")
-  onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );
-  };
+  const [selected, setSelected] = useState('name');
+  const [scanned, setScanned] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <Header onChangeFilterstate={(value)=>{setSelected(value)}}
-/>
-<QRCodeScanner
-        onRead={onSuccess()}
-        flashMode={RNCamera.Constants.FlashMode.torch}
-        topContent={
-          <Text style={styles.centerText}>
-            Go to{' '}
-            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-            your computer and scan the QR code.
-          </Text>
-        }
-        bottomContent={
-          <TouchableOpacity style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
-          </TouchableOpacity>
-        }
-      />
-   
+    <View>
+      {!scanned && (
+        <Header
+          onChangeFilterstate={value => {
+            setSelected(value);
+          }}
+        />
+      )}
+      {scanned && (
+        <View style={{width: '100%', height: 60, backgroundColor: 'yellow'}}>
+          <Text>scan Success</Text>
+        </View>
+      )}
+      <View style={styles.container}>
+        <Text style={styles.centerText}>
+          <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
+          your computer and scan the QR code.
+        </Text>
+
+        <View style={styles.cameraview}>
+          <QRCodeScanner
+            onRead={() => {
+              setScanned(true);
+            }}
+            flashMode={RNCamera.Constants.FlashMode.torch}
+            cameraStyle={styles.camera}
+          />
+        </View>
+        <TouchableOpacity style={styles.buttonTouchable}>
+          <Text style={styles.buttonText}>OK. Got it!</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777'
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000'
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)'
-  },
-  buttonTouchable: {
-    padding: 16
-  }
-});
+
 export default Scanner;

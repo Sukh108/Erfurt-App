@@ -3,18 +3,30 @@
  * @format
  */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image, Button,Modal} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Button, Modal} from 'react-native';
 import styles from './styles';
 import img from '../../constants/Image/Img';
 import {useSelector, useDispatch} from 'react-redux';
-import {Add, Remove} from '../../redux/actions/Action';
-import FilterScreen from '../../modules/FilterScreen/FilterScreen'
-function Header({back=false, filter=false, onPress, fav=false, item,onChangeFilterstate}) {
+import {
+  Add,
+  addToFavorite,
+  Remove,
+  removeToFavorite,
+} from '../../redux/actions/Action';
+import FilterScreen from '../../modules/FilterScreen/FilterScreen';
+function Header({
+  back = false,
+  filter = false,
+  onPress,
+  fav = false,
+  item,
+  onChangeFilterstate,
+}) {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selected,setSelected] =useState("name")
-  useEffect(()=>{
-    onChangeFilterstate(selected)
-  })
+  const [selected, setSelected] = useState('name');
+  useEffect(() => {
+    onChangeFilterstate(selected);
+  });
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -51,20 +63,27 @@ function Header({back=false, filter=false, onPress, fav=false, item,onChangeFilt
         </TouchableOpacity>
       )}
       <Modal visible={isModalVisible} animationType="slide">
-        <FilterScreen onPress={toggleModal} onChangeFilter={(value)=>{setSelected(value)}}/>
+        <FilterScreen
+          onPress={toggleModal}
+          onChangeFilter={value => {
+            setSelected(value);
+          }}
+        />
       </Modal>
-      {fav && (
+      {fav && !favcolor && (
         <TouchableOpacity
           onPress={() => {
-            dispacth({type: Add, payload: item});
+            setfav(!favcolor);
+            dispacth(addToFavorite(item));
           }}>
           <Image source={img.favoriteicon} style={styles.image2} />
         </TouchableOpacity>
       )}
-      {favcolor && (
+      {fav && favcolor && (
         <TouchableOpacity
           onPress={() => {
-            dispacth({type: Remove, payload: item});
+            setfav(!favcolor);
+            dispacth(removeToFavorite(item));
           }}>
           <Image source={img.favoriteiconselect} style={styles.image2} />
         </TouchableOpacity>

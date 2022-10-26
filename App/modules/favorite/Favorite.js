@@ -36,7 +36,7 @@ function Favorite({navigation}) {
         renderItem={({item}) => (
           <List
             onPress={() => {
-              navigation.navigate('Detail', {data: item});
+              navigation.navigate('Detail', {data: item.payload});
             }}
             item={item.payload}
           />

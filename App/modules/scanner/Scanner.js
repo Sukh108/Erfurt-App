@@ -27,10 +27,7 @@ function Scanner(props) {
         </View>
       )}
       <View style={styles.container}>
-        <Text style={styles.centerText}>
-          <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-          your computer and scan the QR code.
-        </Text>
+        <Text style={styles.centerText}>scan the QR code.</Text>
 
         <View style={styles.cameraview}>
           <QRCodeScanner
@@ -41,9 +38,6 @@ function Scanner(props) {
             cameraStyle={styles.camera}
           />
         </View>
-        <TouchableOpacity style={styles.buttonTouchable}>
-          <Text style={styles.buttonText}>OK. Got it!</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,7 +1,8 @@
 /**
  *
  * @format
- */ import {ScaledSheet} from 'react-native-size-matters';
+ */
+import {ScaledSheet} from 'react-native-size-matters';
 import Colors from '../../styles/Colors';
 export default styles = ScaledSheet.create({
   container: {
@@ -23,5 +24,6 @@ export default styles = ScaledSheet.create({
     marginLeft: '50@ms',
     marginRight: '50@ms',
     marginTop: '50@ms',
+    alignSelf: 'center',
   },
 });

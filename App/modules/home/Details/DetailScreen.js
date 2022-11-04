@@ -22,6 +22,7 @@ function DetailScreen({navigation, route}) {
   const [selected, setSelected] = useState('name');
   const [isfav, setIsfav] = useState('');
   const {data} = route.params;
+  console.log('data:', data);
   const source = {
     html: data.description,
   };

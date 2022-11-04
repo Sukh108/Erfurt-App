@@ -10,16 +10,15 @@ import Styles from './Styles';
 import img from '../../constants/Image/Img';
 import Colors from '../../styles/Colors';
 
-function FilterScreen({navigation, onPress,onChangeFilter}) {
-  const [selected, setSelected] = useState('Name');
-  useEffect(()=>{
-    onChangeFilter(selected)
-  },[selected])
+function FilterScreen({filterValue, onPress, onChangeFilter}) {
+  const [selected, setSelected] = useState(filterValue);
+  useEffect(() => {
+    onChangeFilter(selected);
+  }, [selected]);
   return (
-    <View >
+    <View>
       <View style={Styles.header}>
-        <TouchableOpacity
-          onPress={onPress}>
+        <TouchableOpacity onPress={onPress}>
           <Text style={Styles.cancellationStyle}>Cancellation</Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -74,7 +73,6 @@ function FilterScreen({navigation, onPress,onChangeFilter}) {
         </View>
       </View>
     </View>
-
   );
 }
 

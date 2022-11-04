@@ -17,9 +17,10 @@ function Header({
   isfav,
   item,
   onChangeFilterstate,
+  filterValue,
 }) {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selected, setSelected] = useState('name');
+  const [selected, setSelected] = useState(filterValue);
   useEffect(() => {
     onChangeFilterstate(selected);
   }, [selected]);
@@ -29,7 +30,6 @@ function Header({
 
   const dispacth = useDispatch();
 
-  console.log('isfav;', isfav);
   const [favcolor, setfav] = useState(isfav);
 
   return (
@@ -49,6 +49,7 @@ function Header({
       <Modal visible={isModalVisible} animationType="slide">
         <FilterScreen
           onPress={toggleModal}
+          filterValue={selected}
           onChangeFilter={value => {
             setSelected(value);
             // console.log(value);

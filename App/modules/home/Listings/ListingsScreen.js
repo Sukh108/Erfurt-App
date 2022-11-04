@@ -16,17 +16,20 @@ import {
 import Header from '../../../components/header/Header';
 import List from '../../../components/list/List';
 import Search from '../../../components/search/Search';
-
+import Geolocation from 'react-native-geolocation-service';
+import * as geolib from 'geolib';
 import styles from './styles';
 import {requestLocationPermission} from '../../../configs/Location';
 import {useSelector} from 'react-redux';
 import RenderHTML from 'react-native-render-html';
 
 function ListingsScreen({navigation, route}) {
+  const [distances, setDistances] = useState();
   const name = route.params;
   const itemname = name.itemname.name;
   const [categories, setCategories] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [filterValue, setFilterValue] = useState('name');
 
   let Dummydata = [];
   const [data, setData] = useState(Dummydata);
@@ -65,7 +68,25 @@ function ListingsScreen({navigation, route}) {
         return 0;
       }),
     );
+    Geolocation.getCurrentPosition(position => {
+      setDistances(position.coords);
+    });
   }, []);
+  const getdistance = item => {
+    let lat = item.split(',');
+    console.log(distances);
+    var dist = geolib.getDistance(
+      {
+        latitude: distances.latitude,
+        longitude: distances.longitude,
+      },
+      {
+        latitude: lat[0],
+        longitude: lat[1],
+      },
+    );
+    return dist;
+  };
 
   for (let index = 0; index < categories.length; index++) {
     if (categories[index].name == itemname) {
@@ -82,7 +103,9 @@ function ListingsScreen({navigation, route}) {
             onPress={() => {
               navigation.goBack();
             }}
+            filterValue={filterValue}
             onChangeFilterstate={value => {
+              setFilterValue(value);
               if (value == 'Name') {
                 setData(
                   Dummydata.sort((a, b) => {
@@ -100,7 +123,10 @@ function ListingsScreen({navigation, route}) {
                   }),
                 );
               } else if (value == 'Distance') {
-                setData(data.sort((a, b) => a.distance - b.distance));
+                for (i = 0; i < data.length; i++) {
+                  data[i]['distance'] = getdistance(data[i].officeLocation);
+                }
+                data.sort((a, b) => a.distance - b.distance);
               }
             }}
           />

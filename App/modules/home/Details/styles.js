@@ -9,17 +9,36 @@ export default styles = ScaledSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
-  image: {
+  img: {
     width: '100%',
-    height: '150@vs',
+    height: '100@ms',
+    resizeMode: 'stretch',
   },
-  headerTextStyle: {
-    color: 'black',
-    textAlign: 'justify',
-    lineHeight: '20@ms',
-    // Roboto
+  headerImage: {
+    width: '100%',
+    height: '200@ms',
+    resizeMode: 'stretch',
+    // marginLeft: '-20@ms',
+    // marginRight: '-20@ms',
   },
-  bottomContainer: {
-    padding: '20@ms',
+  imageContainer: {
+    backgroundColor: Colors.blackColor,
+    width: '100%',
+    position: 'absolute',
+    bottom: '0@ms',
+    left: '0@ms',
+    padding: '15@ms',
+    paddingTop: '10@ms',
+  },
+  textStyle: {
+    color: Colors.white,
+    fontWeight: '500',
+    fontSize: '18@ms',
+    opacity: 1,
+  },
+  line: {
+    height: '1@vs',
+    backgroundColor: Colors.silvergrey,
+    margin: '5@ms',
   },
 });

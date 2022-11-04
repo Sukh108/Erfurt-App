@@ -1,21 +1,19 @@
+import {AddInfo} from '../actions/types';
+
 /**
  *
  * @format
  */
-
-import {act} from 'react-test-renderer';
-
 const initialState = {
-  categories: [],
+  info: [],
 };
-export const categoriesreducer = (state = initialState, action) => {
+export default InfoReducer = (state = initialState, action) => {
   // const [categories, setCategories] = useState([]);
-
   switch (action.type) {
-    case 'Addfromfirebase':
+    case AddInfo:
       return {
         ...state,
-        categories: state.categories.concat({
+        info: state.info.concat({
           payload: action.payload,
         }),
       };

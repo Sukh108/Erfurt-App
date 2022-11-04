@@ -7,18 +7,14 @@ import {View, Text, TouchableOpacity, Image, Button, Modal} from 'react-native';
 import styles from './styles';
 import img from '../../constants/Image/Img';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  Add,
-  addToFavorite,
-  Remove,
-  removeToFavorite,
-} from '../../redux/actions/Action';
+import {addToFavorite, removeToFavorite} from '../../redux/actions/Action';
 import FilterScreen from '../../modules/FilterScreen/FilterScreen';
 function Header({
   back = false,
   filter = false,
   onPress,
   fav = false,
+  isfav,
   item,
   onChangeFilterstate,
 }) {
@@ -26,40 +22,28 @@ function Header({
   const [selected, setSelected] = useState('name');
   useEffect(() => {
     onChangeFilterstate(selected);
-  });
+  }, [selected]);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  function containsObject(obj) {
-    const list = data;
-    var i;
-    if (list[0] != undefined) {
-      for (i = 0; i < list.length; i++) {
-        if (list[i].payload === obj) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-  }
 
   const dispacth = useDispatch();
 
-  const data = useSelector(state => state.favoritedata);
+  console.log('isfav;', isfav);
+  const [favcolor, setfav] = useState(isfav);
 
-  const [favcolor, setfav] = useState(containsObject(item));
   return (
     <View style={styles.container}>
       {back && (
-        <TouchableOpacity onPress={onPress}>
-          <Image source={img.back} style={styles.image1} />
+        <TouchableOpacity onPress={onPress} style={styles.image1}>
+          <Image source={img.back} />
         </TouchableOpacity>
       )}
+      {!back && filter && <View style={styles.image1}></View>}
       <Text style={styles.text}>Erfurt-App</Text>
       {filter && (
-        <TouchableOpacity onPress={toggleModal}>
-          <Image source={img.filter} style={styles.image2} />
+        <TouchableOpacity onPress={() => toggleModal()} style={styles.image2}>
+          <Image source={img.filter} />
         </TouchableOpacity>
       )}
       <Modal visible={isModalVisible} animationType="slide">
@@ -67,25 +51,29 @@ function Header({
           onPress={toggleModal}
           onChangeFilter={value => {
             setSelected(value);
+            // console.log(value);
           }}
         />
       </Modal>
       {fav && !favcolor && (
         <TouchableOpacity
+          style={styles.image2}
           onPress={() => {
             setfav(!favcolor);
+
             dispacth(addToFavorite(item));
           }}>
-          <Image source={img.favoriteicon} style={styles.image2} />
+          <Image source={img.favoriteicon} />
         </TouchableOpacity>
       )}
       {fav && favcolor && (
         <TouchableOpacity
+          style={styles.image2}
           onPress={() => {
             setfav(!favcolor);
             dispacth(removeToFavorite(item));
           }}>
-          <Image source={img.favoriteiconselect} style={styles.image2} />
+          <Image source={img.favoriteiconselect} />
         </TouchableOpacity>
       )}
     </View>

@@ -11,7 +11,6 @@ const initialState = {
 const favReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'Add':
-      console.log(action.payload);
       return {
         ...state,
         favoritedata: state.favoritedata.concat({
@@ -19,10 +18,12 @@ const favReducer = (state = initialState, action) => {
         }),
       };
     case 'Remove':
+      console.log('data', action.payload);
       return {
         ...state,
         favoritedata: state.favoritedata.filter(item => {
-          item.payload != action.payload;
+          console.log(item.payload);
+          return item.payload != action.payload;
         }),
       };
 

@@ -29,7 +29,7 @@ export default styles = ScaledSheet.create({
   },
   categoryimage: {
     height: '85@ms',
-    width: '80@ms',
+    width: '78@ms',
   },
   body: {
     marginLeft: '15@ms',

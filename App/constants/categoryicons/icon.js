@@ -4,67 +4,67 @@
  */
 export const icon = [
   {
-    name: 'sehenswert',
+    name: 'Sehenswert',
     path: require('../../assets/categoryIcons/sehenswert.png'),
   },
   {
-    name: 'unterkunft',
+    name: 'Unterkunft',
     path: require('../../assets/categoryIcons/unterkunft.png'),
   },
   {
-    name: 'dienstleistungen',
+    name: 'Dienstleistungen',
     path: require('../../assets/categoryIcons/dienstleistungen.png'),
   },
   {
-    name: 'angebote',
+    name: 'Angebote',
     path: require('../../assets/categoryIcons/angebote.png'),
   },
   {
-    name: 'essen',
+    name: 'Essen & Trinken',
     path: require('../../assets/categoryIcons/essen.png'),
   },
   {
-    name: 'einkaufen',
+    name: 'Einkaufen',
     path: require('../../assets/categoryIcons/einkaufen.png'),
   },
   {
-    name: 'freizeit',
+    name: 'Freizeit',
     path: require('../../assets/categoryIcons/freizeit.png'),
   },
   {
-    name: 'parken',
+    name: 'Parken',
     path: require('../../assets/categoryIcons/parken.png'),
   },
   {
-    name: 'museen',
+    name: 'Museen',
     path: require('../../assets/categoryIcons/museen.png'),
   },
   {
-    name: 'immobilien',
+    name: 'Immobilien',
     path: require('../../assets/categoryIcons/immobilien.png'),
   },
   {
-    name: 'ausflugsziele',
+    name: 'Ausflugsziele',
     path: require('../../assets/categoryIcons/ausflugsziele.png'),
   },
   {
-    name: 'flughafen',
+    name: 'Flughafen',
     path: require('../../assets/categoryIcons/flughafen.png'),
   },
   {
-    name: 'nahverkehr',
+    name: 'Nahverkehr',
     path: require('../../assets/categoryIcons/nahverkehr.png'),
   },
   {
-    name: 'events',
+    name: 'event',
     path: require('../../assets/categoryIcons/events.png'),
   },
   {
-    name: 'jobs',
+    name: 'job',
     path: require('../../assets/categoryIcons/jobs.png'),
   },
   {
-    name: 'impressionen',
+    name: 'Impressionen',
     path: require('../../assets/categoryIcons/impressionen.png'),
   },
 ];

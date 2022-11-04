@@ -2,24 +2,39 @@
  *
  * @format
  */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from './style';
 import img from '../../constants/Image/Img';
 import Header from '../../components/header/Header';
 import {icon} from '../../constants/categoryicons/icon';
+import {useSelector} from 'react-redux';
 
 function Viewscreen({navigation}) {
+  const [categories, setCategories] = useState([]);
+
+  const data = useSelector(state => state.categoriesreducer.categories);
+
+  useEffect(() => {
+    if (data.length !== 0) {
+      setCategories(Object.values(data[0].payload));
+    }
+  }, [data]);
   const Render = item => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Listing');
-        }}
-        style={styles.categoryicon}>
-        <Image source={item.item.path} style={styles.categoryimage} />
-      </TouchableOpacity>
-    );
+    var name = item.item.name;
+    for (let index = 0; index < icon.length; index++) {
+      if (icon[index].name == name) {
+        return (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Listing', {itemname: {name}});
+            }}
+            style={styles.categoryicon}>
+            <Image source={icon[index].path} style={styles.categoryimage} />
+          </TouchableOpacity>
+        );
+      }
+    }
   };
   const ListHeader = () => {
     return (
@@ -46,7 +61,7 @@ function Viewscreen({navigation}) {
         }}
       />
       <FlatList
-        data={icon}
+        data={categories}
         numColumns={4}
         renderItem={({item}) => <Render item={item} />}
         keyExtractor={item => item.index}

@@ -1,21 +1,20 @@
+import {AddBusiness} from '../actions/types';
+
 /**
  *
  * @format
  */
-
-import {act} from 'react-test-renderer';
-
 const initialState = {
-  categories: [],
+  business: [],
 };
-export const categoriesreducer = (state = initialState, action) => {
+export default businessReducer = (state = initialState, action) => {
   // const [categories, setCategories] = useState([]);
 
   switch (action.type) {
-    case 'Addfromfirebase':
+    case 'AddBusiness':
       return {
         ...state,
-        categories: state.categories.concat({
+        business: state.business.concat({
           payload: action.payload,
         }),
       };

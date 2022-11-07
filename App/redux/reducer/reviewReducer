@@ -1,0 +1,24 @@
+/**
+ *
+ * @format
+ */
+import {AddReview} from '../actions/types';
+const initialState = {
+  review: [],
+};
+export default reviewReducer = (state = initialState, action) => {
+  // const [categories, setCategories] = useState([]);
+  console.log('data', action.payload);
+  switch (action.type) {
+    case AddReview:
+      return {
+        ...state,
+        review: state.review.concat({
+          payload: action.payload,
+        }),
+      };
+
+    default:
+      return state;
+  }
+};

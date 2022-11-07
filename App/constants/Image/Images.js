@@ -32,4 +32,6 @@ export const placeholder = require('../../assets/categoryIcons/placeholder.jpg')
 export const favoriteicon = require('../../assets/detail/fav.png');
 export const favoriteiconselect = require('../../assets/detail/star.png');
 export const tick = require('../../assets/tick.png');
-export const black = require('../../assets/detail/black.png');
+export const fullstar = require('../../assets/detail/starfull.svg');
+export const halfFullStar = require('../../assets/detail/starhalf.svg');
+export const emptyStar = require('../../assets/detail/starempty.svg');

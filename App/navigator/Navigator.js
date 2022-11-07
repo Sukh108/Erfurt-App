@@ -21,9 +21,9 @@ import {useDispatch} from 'react-redux';
 import {
   getfromfirebase,
   getbusinessfromfirebase,
+  getReviewfromfirebase,
 } from '../redux/actions/Action';
 import {getinfofromfirebase} from '../redux/actions/Infoaction';
-import database from '@react-native-firebase/database';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 function TabNavigator() {
@@ -41,6 +41,7 @@ function Navigator(props) {
     dispatch(getfromfirebase());
     dispatch(getbusinessfromfirebase());
     dispatch(getinfofromfirebase());
+    dispatch(getReviewfromfirebase());
   }, []);
 
   return (

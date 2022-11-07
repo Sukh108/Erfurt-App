@@ -2,7 +2,14 @@
  *
  * @format
  */
-import {Add, Remove, Addfromfirebase, AddBusiness, AddInfo} from './types';
+import {
+  Add,
+  Remove,
+  Addfromfirebase,
+  AddBusiness,
+  AddInfo,
+  AddReview,
+} from './types';
 import database from '@react-native-firebase/database';
 import {useState} from 'react';
 export const addToFavorite = data => {
@@ -28,6 +35,14 @@ export const getbusinessfromfirebase = data => {
     const reference = database().ref('/businesses');
     reference.once('value', snapshot => {
       dispatch({type: AddBusiness, payload: snapshot.val()});
+    });
+  };
+};
+export const getReviewfromfirebase = data => {
+  return async dispatch => {
+    const reference = database().ref('/reviews');
+    reference.once('value', snapshot => {
+      dispatch({type: AddReview, payload: snapshot.val()});
     });
   };
 };

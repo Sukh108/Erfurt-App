@@ -3,7 +3,14 @@
  * @format
  */
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import styles from './style';
 import img from '../../constants/Image/Img';
 import Header from '../../components/header/Header';
@@ -51,25 +58,29 @@ function Viewscreen({navigation}) {
       </>
     );
   };
-  return (
-    <View style={styles.headcontainer}>
-      <Header
-        back={false}
-        filter={false}
-        onChangeFilterstate={value => {
-          console.log(value);
-        }}
-      />
-      <FlatList
-        data={categories}
-        numColumns={4}
-        renderItem={({item}) => <Render item={item} />}
-        keyExtractor={item => item.index}
-        ListHeaderComponent={<ListHeader />}
-        style={styles.body}
-      />
-    </View>
-  );
+  if (data.length == 0) {
+    return <ActivityIndicator size="large" color="black" />;
+  } else {
+    return (
+      <View style={styles.headcontainer}>
+        <Header
+          back={false}
+          filter={false}
+          onChangeFilterstate={value => {
+            console.log(value);
+          }}
+        />
+        <FlatList
+          data={categories}
+          numColumns={4}
+          renderItem={({item}) => <Render item={item} />}
+          keyExtractor={item => item.index}
+          ListHeaderComponent={<ListHeader />}
+          style={styles.body}
+        />
+      </View>
+    );
+  }
 }
 
 export default Viewscreen;

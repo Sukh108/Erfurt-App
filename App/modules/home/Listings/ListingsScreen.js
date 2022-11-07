@@ -12,6 +12,7 @@ import {
   ScrollView,
   TouchableOpacity,
   useWindowDimensions,
+  ActivityIndicator,
 } from 'react-native';
 import Header from '../../../components/header/Header';
 import List from '../../../components/list/List';
@@ -130,6 +131,9 @@ function ListingsScreen({navigation, route}) {
               }
             }}
           />
+          {Dummydata.length == 0 && categories.length == 0 && (
+            <ActivityIndicator size="large" color="black" />
+          )}
           <ScrollView>
             <Image
               source={{uri: categories[index].picture}}

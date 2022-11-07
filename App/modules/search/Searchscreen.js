@@ -3,7 +3,7 @@
  * @format
  */
 import React, {useState} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, ActivityIndicator} from 'react-native';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
 import List from '../../components/list/List';
@@ -46,6 +46,9 @@ function Searchscreen({navigation}) {
           // );
         }}
       />
+      {Dummydata.length == 0 && (
+        <ActivityIndicator size="large" color="black" />
+      )}
       <FlatList
         data={
           searchValue == ''

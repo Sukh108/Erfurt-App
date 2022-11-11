@@ -21,9 +21,10 @@ import {useDispatch} from 'react-redux';
 import {
   getfromfirebase,
   getbusinessfromfirebase,
-  getReviewfromfirebase,
 } from '../redux/actions/Action';
 import {getinfofromfirebase} from '../redux/actions/Infoaction';
+import OpeningTimeScreen from '../modules/home/Details/opningTime/openingTimeScreen';
+import ReviewScreen from '../modules/home/Details/reviews/ReviewScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 function TabNavigator() {
@@ -32,6 +33,8 @@ function TabNavigator() {
       <Stack.Screen name="Home" component={Viewscreen} />
       <Stack.Screen name="Listing" component={ListingsScreen} />
       <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen name="OpeningTime" component={OpeningTimeScreen} />
+      <Stack.Screen name="Review" component={ReviewScreen} />
     </Stack.Navigator>
   );
 }
@@ -41,7 +44,6 @@ function Navigator(props) {
     dispatch(getfromfirebase());
     dispatch(getbusinessfromfirebase());
     dispatch(getinfofromfirebase());
-    dispatch(getReviewfromfirebase());
   }, []);
 
   return (

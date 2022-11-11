@@ -8,7 +8,6 @@ const initialState = {
   info: [],
 };
 export default InfoReducer = (state = initialState, action) => {
-  // const [categories, setCategories] = useState([]);
   switch (action.type) {
     case AddInfo:
       return {

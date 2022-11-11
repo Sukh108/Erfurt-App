@@ -18,8 +18,6 @@ export default styles = ScaledSheet.create({
     width: '100%',
     height: '200@ms',
     resizeMode: 'stretch',
-    // marginLeft: '-20@ms',
-    // marginRight: '-20@ms',
   },
   imageContainer: {
     backgroundColor: Colors.blackColor,

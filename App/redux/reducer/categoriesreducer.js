@@ -9,8 +9,6 @@ const initialState = {
   categories: [],
 };
 export const categoriesreducer = (state = initialState, action) => {
-  // const [categories, setCategories] = useState([]);
-
   switch (action.type) {
     case 'Addfromfirebase':
       return {

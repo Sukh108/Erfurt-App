@@ -16,12 +16,15 @@ import img from '../../constants/Image/Img';
 import Header from '../../components/header/Header';
 import {icon} from '../../constants/categoryicons/icon';
 import {useSelector} from 'react-redux';
+import {requestLocationPermission} from '../../configs/Location';
 
 function Viewscreen({navigation}) {
   const [categories, setCategories] = useState([]);
 
   const data = useSelector(state => state.categoriesreducer.categories);
-
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
   useEffect(() => {
     if (data.length !== 0) {
       setCategories(Object.values(data[0].payload));

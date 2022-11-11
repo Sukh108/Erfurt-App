@@ -3,35 +3,23 @@
  * @format
  */
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import styles from './styles';
-import Geolocation from 'react-native-geolocation-service';
-import * as geolib from 'geolib';
 import {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import styles from './styles';
 
 function List({item, onPress}) {
-  var [distances, setDistances] = useState([]);
-  let lat = item.officeLocation.split(',');
-
-  Geolocation.getCurrentPosition(position => {
-    setDistances(
-      geolib.getDistance(
-        {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        },
-        {
-          latitude: lat[0],
-          longitude: lat[1],
-        },
-      ),
-    );
-  });
-
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.flatcontainer}>
-        <Text style={styles.distance}>{(distances / 1000).toFixed(2)} km</Text>
+        <Text style={styles.distance}>
+          {(item.distance / 1000).toFixed(2)} km
+        </Text>
         <View style={styles.flatview}>
           <Image source={{uri: item.logo}} style={styles.flatimage} />
           <View style={styles.flatdataview}>

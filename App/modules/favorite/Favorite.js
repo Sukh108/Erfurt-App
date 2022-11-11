@@ -4,13 +4,15 @@
  */
 
 import React, {useState} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
 import List from '../../components/list/List';
 import Geolocation from 'react-native-geolocation-service';
 import * as geolib from 'geolib';
+import styles from './Styles';
+import img from '../../constants/Image/Img';
 function Favorite({navigation}) {
   const [selected, setSelected] = useState('name');
   const [distances, setDistances] = useState();
@@ -43,32 +45,36 @@ function Favorite({navigation}) {
         onChangeFilterstate={value => {
           if (value == 'Name') {
             data.sort((a, b) => {
-              const nameA = a.payload.name.toUpperCase(); // ignore upper and lowercase
-              const nameB = b.payload.name.toUpperCase(); // ignore upper and lowercase
+              const nameA = a.payload.name.toUpperCase();
+              const nameB = b.payload.name.toUpperCase();
               if (nameA < nameB) {
                 return -1;
               }
               if (nameA > nameB) {
                 return 1;
               }
-
-              // names must be equal
               return 0;
             });
           } else if (value == 'Distance') {
             for (i = 0; i < data.length; i++) {
-              console.log(data[i]);
               data[i]['distance'] = getdistance(data[i].payload.officeLocation);
             }
             data.sort((a, b) => a.distance - b.distance);
           }
         }}
       />
-      <Search
-        onChange={value => {
-          setSearchValue(value);
-        }}
-      />
+      {data.length != 0 && (
+        <Search
+          onChange={value => {
+            setSearchValue(value);
+          }}
+        />
+      )}
+      {data.length == 0 && (
+        <View style={styles.blank}>
+          <Image source={img.blankimage} />
+        </View>
+      )}
       <FlatList
         data={
           searchValue == ''

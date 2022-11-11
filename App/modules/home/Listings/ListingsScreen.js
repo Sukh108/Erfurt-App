@@ -5,12 +5,9 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  Text,
   Image,
   FlatList,
-  TextInput,
   ScrollView,
-  TouchableOpacity,
   useWindowDimensions,
   ActivityIndicator,
 } from 'react-native';
@@ -25,7 +22,7 @@ import {useSelector} from 'react-redux';
 import RenderHTML from 'react-native-render-html';
 
 function ListingsScreen({navigation, route}) {
-  const [distances, setDistances] = useState();
+  const [position, setposition] = useState();
   const name = route.params;
   const itemname = name.itemname.name;
   const [categories, setCategories] = useState([]);
@@ -49,37 +46,32 @@ function ListingsScreen({navigation, route}) {
       }
     }
   }
-  // console.log('businesses', businesses);
 
   useEffect(() => {
-    requestLocationPermission();
     setCategories(category);
     setData(
       Dummydata.sort((a, b) => {
-        const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
         if (nameA < nameB) {
           return -1;
         }
         if (nameA > nameB) {
           return 1;
         }
-
-        // names must be equal
         return 0;
       }),
     );
     Geolocation.getCurrentPosition(position => {
-      setDistances(position.coords);
+      setposition(position.coords);
     });
   }, []);
   const getdistance = item => {
     let lat = item.split(',');
-    console.log(distances);
     var dist = geolib.getDistance(
       {
-        latitude: distances.latitude,
-        longitude: distances.longitude,
+        latitude: position.latitude,
+        longitude: position.longitude,
       },
       {
         latitude: lat[0],
@@ -88,7 +80,11 @@ function ListingsScreen({navigation, route}) {
     );
     return dist;
   };
-
+  if (position != undefined) {
+    for (i = 0; i < data.length; i++) {
+      data[i]['distance'] = getdistance(data[i].officeLocation);
+    }
+  }
   for (let index = 0; index < categories.length; index++) {
     if (categories[index].name == itemname) {
       const source = {
@@ -110,23 +106,18 @@ function ListingsScreen({navigation, route}) {
               if (value == 'Name') {
                 setData(
                   Dummydata.sort((a, b) => {
-                    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                    const nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                    const nameA = a.name.toUpperCase();
+                    const nameB = b.name.toUpperCase();
                     if (nameA < nameB) {
                       return -1;
                     }
                     if (nameA > nameB) {
                       return 1;
                     }
-
-                    // names must be equal
                     return 0;
                   }),
                 );
               } else if (value == 'Distance') {
-                for (i = 0; i < data.length; i++) {
-                  data[i]['distance'] = getdistance(data[i].officeLocation);
-                }
                 data.sort((a, b) => a.distance - b.distance);
               }
             }}

@@ -38,11 +38,3 @@ export const getbusinessfromfirebase = data => {
     });
   };
 };
-export const getReviewfromfirebase = data => {
-  return async dispatch => {
-    const reference = database().ref('/reviews');
-    reference.once('value', snapshot => {
-      dispatch({type: AddReview, payload: snapshot.val()});
-    });
-  };
-};

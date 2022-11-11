@@ -20,13 +20,13 @@ export default styles = ScaledSheet.create({
     color: Colors.white,
   },
   image1: {
-    width: '30@ms',
-    height: '30@ms',
     marginRight: '70@ms',
   },
   image2: {
+    marginLeft: '80@ms',
+  },
+  img: {
     width: '30@ms',
     height: '30@ms',
-    marginLeft: '80@ms',
   },
 });

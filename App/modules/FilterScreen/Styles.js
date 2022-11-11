@@ -6,7 +6,6 @@ import {ScaledSheet} from 'react-native-size-matters';
 import Colors from '../../styles/Colors';
 
 export default styles = ScaledSheet.create({
- 
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -14,21 +13,14 @@ export default styles = ScaledSheet.create({
     backgroundColor: Colors.white,
   },
   cancellationStyle: {
-    // position: 'relative',
-    // left: '10@ms',
-    // top: '10@ms',
     color: Colors.primery,
     fontSize: '16@ms',
     fontWeight: '400',
-    // alignSelf: 'flex-end',
   },
   heading: {
     fontSize: '16@ms',
     fontWeight: '460',
     color: Colors.black,
-
-    // alignContent: 'center',
-    // textAlign: 'center',
   },
   title: {
     padding: '10@ms',
@@ -39,7 +31,7 @@ export default styles = ScaledSheet.create({
     color: Colors.black,
   },
   optionMenu: {
-    backgroundColor:Colors.white,
+    backgroundColor: Colors.white,
     padding: '10@ms',
   },
   options: {

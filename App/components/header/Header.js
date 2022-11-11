@@ -3,10 +3,10 @@
  * @format
  */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image, Button, Modal} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Modal} from 'react-native';
 import styles from './styles';
 import img from '../../constants/Image/Img';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {addToFavorite, removeToFavorite} from '../../redux/actions/Action';
 import FilterScreen from '../../modules/FilterScreen/FilterScreen';
 function Header({
@@ -36,14 +36,15 @@ function Header({
     <View style={styles.container}>
       {back && (
         <TouchableOpacity onPress={onPress} style={styles.image1}>
-          <Image source={img.back} />
+          <Image source={img.back} style={styles.img} />
         </TouchableOpacity>
       )}
       {!back && filter && <View style={styles.image1}></View>}
       <Text style={styles.text}>Erfurt-App</Text>
+      {back && !filter && !fav && <View style={styles.image1}></View>}
       {filter && (
         <TouchableOpacity onPress={() => toggleModal()} style={styles.image2}>
-          <Image source={img.filter} />
+          <Image source={img.filter} style={styles.img} />
         </TouchableOpacity>
       )}
       <Modal visible={isModalVisible} animationType="slide">
@@ -52,7 +53,6 @@ function Header({
           filterValue={selected}
           onChangeFilter={value => {
             setSelected(value);
-            // console.log(value);
           }}
         />
       </Modal>
@@ -64,7 +64,7 @@ function Header({
 
             dispacth(addToFavorite(item));
           }}>
-          <Image source={img.favoriteicon} />
+          <Image source={img.favoriteicon} style={styles.img} />
         </TouchableOpacity>
       )}
       {fav && favcolor && (
@@ -74,7 +74,7 @@ function Header({
             setfav(!favcolor);
             dispacth(removeToFavorite(item));
           }}>
-          <Image source={img.favoriteiconselect} />
+          <Image source={img.favoriteiconselect} style={styles.img} />
         </TouchableOpacity>
       )}
     </View>

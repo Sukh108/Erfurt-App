@@ -9,11 +9,19 @@ import Search from '../../components/search/Search';
 import List from '../../components/list/List';
 import {useSelector} from 'react-redux';
 import {useEffect} from 'react';
-
+import styles from './styles';
+import Geolocation from 'react-native-geolocation-service';
+import * as geolib from 'geolib';
 function Searchscreen({navigation}) {
+  const [position, setposition] = useState();
+  useEffect(() => {
+    Geolocation.getCurrentPosition(position => {
+      setposition(position.coords);
+    });
+  }, []);
   const [selected, setSelected] = useState('name');
   const [searchValue, setSearchValue] = useState('');
-  const Dummydata = [];
+  const AllBusiness = [];
   const businesses = useSelector(state =>
     Object.values(state.businessReducer.business[0].payload),
   );
@@ -21,11 +29,29 @@ function Searchscreen({navigation}) {
     let nameA = businesses[index].category;
 
     if (nameA != undefined) {
-      Dummydata.push(businesses[index]);
+      AllBusiness.push(businesses[index]);
     }
   }
-  const [data, setData] = useState(Dummydata);
-
+  const [data, setData] = useState(AllBusiness);
+  const getdistance = item => {
+    let lat = item.split(',');
+    var dist = geolib.getDistance(
+      {
+        latitude: position.latitude,
+        longitude: position.longitude,
+      },
+      {
+        latitude: lat[0],
+        longitude: lat[1],
+      },
+    );
+    return dist;
+  };
+  if (position != undefined) {
+    for (i = 0; i < data.length; i++) {
+      data[i]['distance'] = getdistance(data[i].officeLocation);
+    }
+  }
   return (
     <View style={styles.container}>
       <Header
@@ -37,23 +63,16 @@ function Searchscreen({navigation}) {
       <Search
         onChange={value => {
           setSearchValue(value);
-
-          // setData(
-          //   Dummydata.filter(it => {
-          //     // console.log(it.name.includes(value));
-          //     return it.name.includes(value);
-          //   }),
-          // );
         }}
       />
-      {Dummydata.length == 0 && (
+      {AllBusiness.length == 0 && (
         <ActivityIndicator size="large" color="black" />
       )}
       <FlatList
         data={
           searchValue == ''
             ? data
-            : Dummydata.filter(item => {
+            : AllBusiness.filter(item => {
                 return item.name.includes(searchValue);
               })
         }

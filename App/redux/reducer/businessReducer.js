@@ -8,8 +8,6 @@ const initialState = {
   business: [],
 };
 export default businessReducer = (state = initialState, action) => {
-  // const [categories, setCategories] = useState([]);
-
   switch (action.type) {
     case 'AddBusiness':
       return {

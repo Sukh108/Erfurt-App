@@ -11,5 +11,6 @@ export default Colors = {
   lightblack: '#111111',
   light: '#cad3db',
   silvergrey: '#C0C0C0',
+  lightsilver: '#f2f2f2',
   blackColor: 'rgba(0,0,0,0.4)',
 };

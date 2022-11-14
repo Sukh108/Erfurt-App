@@ -20,7 +20,7 @@ export const icon = [
     path: require('../../assets/categoryIcons/angebote.png'),
   },
   {
-    name: 'Essen & Trinken',
+    name: 'Essen',
     path: require('../../assets/categoryIcons/essen.png'),
   },
   {
@@ -56,11 +56,11 @@ export const icon = [
     path: require('../../assets/categoryIcons/nahverkehr.png'),
   },
   {
-    name: 'event',
+    name: 'Events',
     path: require('../../assets/categoryIcons/events.png'),
   },
   {
-    name: 'job',
+    name: 'Jobs',
     path: require('../../assets/categoryIcons/jobs.png'),
   },
   {

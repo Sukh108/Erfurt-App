@@ -25,9 +25,16 @@ import {
 import {getinfofromfirebase} from '../redux/actions/Infoaction';
 import OpeningTimeScreen from '../modules/home/Details/opningTime/openingTimeScreen';
 import ReviewScreen from '../modules/home/Details/reviews/ReviewScreen';
+import PushNotification from 'react-native-push-notification';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-function TabNavigator() {
+const createChannels = () => {
+  PushNotification.createChannel({
+    channelId: 'test-channel',
+    channelName: 'test Channel',
+  });
+};
+function StackNavigator() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Viewscreen} />
@@ -44,6 +51,7 @@ function Navigator(props) {
     dispatch(getfromfirebase());
     dispatch(getbusinessfromfirebase());
     dispatch(getinfofromfirebase());
+    createChannels();
   }, []);
 
   return (
@@ -81,7 +89,7 @@ function Navigator(props) {
           headerShown: false,
           tabBarShowLabel: false,
         })}>
-        <Tab.Screen name="Hometab" component={TabNavigator} />
+        <Tab.Screen name="Hometab" component={StackNavigator} />
         <Tab.Screen name="Info" component={Info} />
         <Tab.Screen name="Search" component={Searchscreen} />
         <Tab.Screen name="favorite" component={Favorite} />

@@ -25,10 +25,11 @@ function ListingsScreen({navigation, route}) {
   const [position, setposition] = useState();
   const name = route.params;
   const itemname = name.itemname.name;
+  console.log(itemname);
   const [categories, setCategories] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [filterValue, setFilterValue] = useState('name');
-
+  const [isLoading, setIsLoading] = useState(true);
   let Dummydata = [];
   const [data, setData] = useState(Dummydata);
   const category = useSelector(state =>
@@ -126,9 +127,19 @@ function ListingsScreen({navigation, route}) {
             <ActivityIndicator size="large" color="black" />
           )}
           <ScrollView>
+            {isLoading && (
+              <ActivityIndicator
+                size="large"
+                color="black"
+                style={styles.Image}
+              />
+            )}
             <Image
+              onLoad={() => {
+                setIsLoading(false);
+              }}
               source={{uri: categories[index].picture}}
-              style={styles.Image}
+              style={isLoading ? {} : styles.Image}
             />
             <View style={styles.headtextview}>
               <View style={{justifyContent: 'center'}}>
@@ -139,11 +150,14 @@ function ListingsScreen({navigation, route}) {
                 />
               </View>
             </View>
-            <Search
-              onChange={value => {
-                setSearchValue(value);
-              }}
-            />
+
+            {Dummydata.length != 0 && (
+              <Search
+                onChange={value => {
+                  setSearchValue(value);
+                }}
+              />
+            )}
             <View>
               <FlatList
                 data={

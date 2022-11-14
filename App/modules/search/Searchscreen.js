@@ -57,7 +57,21 @@ function Searchscreen({navigation}) {
       <Header
         filter={true}
         onChangeFilterstate={value => {
-          setSelected(value);
+          if (value == 'Name') {
+            data.sort((a, b) => {
+              const nameA = a.name.toUpperCase();
+              const nameB = b.name.toUpperCase();
+              if (nameA < nameB) {
+                return -1;
+              }
+              if (nameA > nameB) {
+                return 1;
+              }
+              return 0;
+            });
+          } else if (value == 'Distance') {
+            data.sort((a, b) => a.distance - b.distance);
+          }
         }}
       />
       <Search

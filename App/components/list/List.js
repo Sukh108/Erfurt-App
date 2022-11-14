@@ -14,6 +14,7 @@ import {
 import styles from './styles';
 
 function List({item, onPress}) {
+  const [Loading, setIsLoading] = useState(true);
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.flatcontainer}>
@@ -21,7 +22,20 @@ function List({item, onPress}) {
           {(item.distance / 1000).toFixed(2)} km
         </Text>
         <View style={styles.flatview}>
-          <Image source={{uri: item.logo}} style={styles.flatimage} />
+          {Loading && (
+            <ActivityIndicator
+              size="large"
+              color="black"
+              style={styles.flatimage}
+            />
+          )}
+          <Image
+            onLoad={() => {
+              setIsLoading(false);
+            }}
+            source={{uri: item.logo}}
+            style={Loading ? {} : styles.flatimage}
+          />
           <View style={styles.flatdataview}>
             <Text ellipsizeMode="tail" numberOfLines={1} style={styles.title}>
               {item.name}
